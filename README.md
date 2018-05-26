@@ -1,6 +1,6 @@
 # Huntpad
 
-Huntpad is a notepad application with features that are particularly useful to penetration testers and bug hunters - a collection of common injection string generators, hash generators, encoders and decoders, HTML and text manipulation functions, and so on, coupled with syntax highlighting for several programming languages. For more details, visit the [Huntpad homepage](http://www.syhunt.com/?n=Products.SyhuntHuntpad).
+Huntpad is a notepad application with features that are particularly useful to penetration testers and bug hunters - a collection of common injection string generators, hash generators, encoders and decoders, HTML and text manipulation functions, and so on, coupled with syntax highlighting for several programming languages. For more details, visit the [Huntpad homepage](http://www.syhunt.com/en/?n=Products.SyhuntHuntpad).
 
 ## Directories
 
