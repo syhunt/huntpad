@@ -1,0 +1,31 @@
+
+   <menu.popup id="fileincmenu">
+    <li>Filter Evasion
+    <menu>
+     <li onclick="quickinject:run(forge.str_escape_php)">PHP String Escape (chr)</li>
+    </menu>
+    </li>
+    <hr/>
+    <li>My Shell
+     <menu>
+     <li onclick="reqbuilder.edit.insert(quickinject:getshellurl())">Insert Source URL</li>
+     <li onclick="reqbuilder.edit.insert(quickinject:getshelluploadcmd('wget'))">Insert Upload Command (wget)</li>
+     <hr/>
+     <li onclick="reqbuilder.edit.insert(quickinject:getshelluploadcode('wget'))">Insert Upload Code (wget)</li>
+     <li onclick="reqbuilder.edit.insert(quickinject:getshelluploadcode('curl'))">Insert Upload Code (curl)</li>
+     <li onclick="reqbuilder.edit.insert(quickinject:getshelluploadcode('file_get_contents'))">Insert Upload Code (file_get_contents)</li>
+     <hr #fiupsep />
+     <li #fiupua onclick="reqbuilder.request.agent = quickinject:getshelluploadcode('wget')">Use Upload Code as User-Agent</li>
+     <li #fiupost onclick="reqbuilder.request.postdata = quickinject:getshelluploadcode('wget')">Use Upload Code as POST Data</li>
+     </menu>
+    </li>
+    <li #logpoison>Log Poisoning
+     <menu>
+     <li style="foreground-image: url(Huntpad.scx#images\icon_poison.png);" onclick="quickinject:sendpoison_cmd('system')">Poison Current Site - system()</li>
+     <li style="foreground-image: url(Huntpad.scx#images\icon_poison.png);" onclick="quickinject:sendpoison_cmd('passthru')">Poison Current Site - passthru()</li>
+     <li style="foreground-image: url(Huntpad.scx#images\icon_poison.png);" onclick="quickinject:sendpoison_cmd('eval')">Poison Current Site - eval()</li>
+     </menu>
+    </li>
+    <hr #fiprefsep />
+    <li #fiprefs onclick="quickinject:editprefs()">Preferences...</li>
+   </menu>

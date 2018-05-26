@@ -1,0 +1,25 @@
+<menu.popup id="xssmenu">
+ <li>XSS Filter Evasion
+  <menu>
+   <li.script onclick="quickinject:run(forge.str_escape_js)">JS String Escape (CharCode)</li>
+   <hr/>
+   <li onclick="quickinject:run(forge.str_escape_css)">CSS Escape</li>
+  </menu>
+ </li>
+ <hr/>
+ <li.alert onclick="reqbuilder.edit.insert(quickinject.xss.alert)">alert</li>
+ <li.alert onclick="reqbuilder.edit.insert(quickinject.xss.alertcharcode)">alert (Char-Coded)</li>
+ <li>Other alert
+  <menu>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alert22)">%22 alert</li>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alertobject)">object alert</li>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alertnoangle)">No Angle Brackets alert</li>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alert2B)">%2B alert</li>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alertimage)">Image alert</li>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alert2)">&gt; alert</li>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alertbackground)">background alert</li>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alertonload)">onload alert</li>
+  <li onclick="reqbuilder.edit.insert(quickinject.xss.alerttable)">table alert</li>
+  </menu>
+ </li>
+</menu>

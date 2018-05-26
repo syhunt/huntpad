@@ -1,0 +1,7 @@
+CHAR LUA "js_char.lua"
+CONV LUA "js_conv.lua"
+IP LUA "js_ip.lua"
+MAIN LUA "main.lua"
+UTILS001 LUA "php_utils.lua"
+UTILS002 LUA "rb_utils.lua"
+HASEGAWA FILES "hasegawa.js"

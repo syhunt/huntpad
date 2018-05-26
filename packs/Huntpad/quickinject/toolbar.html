@@ -1,0 +1,122 @@
+<style>
+@const ICON_SLEEP: url(Huntpad.scx#images\icon_tbinjection.png);
+
+li.info { foreground-image: url(Huntpad.scx#images\icon_info.png) } 
+li.user { foreground-image: url(Huntpad.scx#images\icon_user.png) } 
+li.users { foreground-image: url(Huntpad.scx#images\icon_users.png) } 
+li.tables { foreground-image: url(Huntpad.scx#images\icon_tables.png) } 
+li.table { foreground-image: url(Huntpad.scx#images\icon_table.png) } 
+li.columns { foreground-image: url(Huntpad.scx#images\icon_table.png) } 
+li.databases { foreground-image: url(Huntpad.scx#images\icon_databases.png) } 
+li.configfile { foreground-image: url(Huntpad.scx#images\icon_config.png) } 
+li.num { foreground-image: url(Huntpad.scx#images\icon_number.png) } 
+li.perc { foreground-image: url(Huntpad.scx#images\icon_percent.png) } 
+li.script { foreground-image: url(Huntpad.scx#images\icon_lang_javascript.png) } 
+li.run { foreground-image: url(Resources.pak#16\icon_exec.png) } 
+li.html { foreground-image: url(Resources.pak#16\icon_html.png) } 
+li.alert { foreground-image: url(Huntpad.scx#images\icon_alert.png) } 
+li.ip { foreground-image: url(Huntpad.scx#images\icon_ip.png) } 
+li.do { foreground-image: url(Resources.pak#16\icon_send.png) } 
+li.undo { foreground-image: url(Resources.pak#16\icon_undo_green.png) } 
+li.hex { foreground-image: url(Huntpad.scx#images\icon_hex.png) } 
+li.str { foreground-image: url(Huntpad.scx#images\icon_textfile.png) } 
+</style>
+  <div .sepv />
+	<div .button style="foreground-image: url(Resources.pak#16\icon_plus_green.png)" onclick="Sandcat.reqbuildermenu:run(quickinject.addtosel)" titleid="for_addtosel"/>
+	<div .button style="foreground-image: url(Resources.pak#16\icon_minus.png)" onclick="Sandcat.reqbuildermenu:run(quickinject.subtosel)" titleid="for_subtosel"/>
+	<div #runjssep class="sepv" />
+	<div #runjsbtn class="button" style="foreground-image: url(Resources.pak#16\icon_exec.png)" onclick="quickinject:runjs()" titleid="for_runjs"/>
+	<div .sepv />
+	<div #textmanip class="button" style="behavior: ~ popup-menu;foreground-image: url(Resources.pak#16\icon_text.png);" titleid="for_textmanip">6
+   <include src="Huntpad.scx#quickinject\toolbar_text.html"/>
+	</div>
+	<div #crypt class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_crypto.png);" titleid="for_crypt">6
+   <include src="Huntpad.scx#quickinject\toolbar_hash.html"/>
+	</div>
+	<div #encoding class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_convert.png);" titleid="for_encoding">6
+   <include src="Huntpad.scx#quickinject\toolbar_encode.html"/>
+  </div>
+	<div #html class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_code_file.png);" titleid="for_html">6
+   <include src="Huntpad.scx#quickinject\toolbar_html.html"/>
+	</div>
+	<div #xss class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_injectxss.png);" titleid="for_xss">6
+   <include src="Huntpad.scx#quickinject\toolbar_xss.html"/>
+	</div>
+	<div #mysql class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_injection_mysql.png);" titleid="for_mysql">6
+   <menu.popup id="injmenu">
+   <include src="Huntpad.scx#quickinject\toolbar_sqli_mysql.html"/>
+   </menu>
+	</div>
+	<div #injection class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_injection_sql.png);" titleid="for_injection">6
+   <include src="Huntpad.scx#quickinject\toolbar_sqli.html"/>
+	</div>
+	<div #blindinj class="button" style="behavior: ~ popup-menu;foreground-image: @ICON_SLEEP" titleid="for_blindinj">6
+   <menu.popup id="blindinjmenu">
+    <li onclick="reqbuilder.edit.insert([[SELECT SLEEP(5);]])">MySQL</li>
+    <li onclick="reqbuilder.edit.insert([[SELECT BENCHMARK(1000000,MD5('A'));]])">MySQL - BENCHMARK() Delay</li>
+    <li onclick="reqbuilder.edit.insert([[WAITFOR DELAY '0:0:5']])">MSSQL</li>
+    <li onclick="reqbuilder.edit.insert([[BEGIN DBMS_LOCK.SLEEP(5);END;]])">Oracle</li>
+    <li onclick="reqbuilder.edit.insert([[SELECT pg_sleep(5);]])">PostgreSQL</li>
+    <li onclick="reqbuilder.edit.insert([[CREATE OR REPLACE FUNCTION sleep(int) RETURNS int AS '/lib/libc.so.6', 'sleep' language 'C' STRICT; SELECT sleep(5);]])">PostgreSQL (2)</li>
+    <hr/>
+    <li onclick="reqbuilder.edit.insert([[var date = new Date();do { curDate = new Date(); } while(curDate-date < 5000);]])">JavaScript</li>
+    <li onclick="reqbuilder.edit.insert([[sleep(5000);]])">MongoDB</li>
+   </menu>
+	</div>
+	<div #fileinc class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_insert.png);" titleid="for_fileinc">6
+   <include src="Huntpad.scx#quickinject\toolbar_fi.html"/>
+	</div>
+	<div #bof class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_bomb.png);" titleid="for_bof">6
+   <menu.popup id="bofmenu">
+    <li onclick="reqbuilder.edit.insert(string.rep('A',128))">Ax128</li>
+    <li onclick="reqbuilder.edit.insert(string.rep('A',256))">Ax256</li>
+    <li onclick="reqbuilder.edit.insert(string.rep('A',512))">Ax512</li>
+    <li onclick="reqbuilder.edit.insert(string.rep('A',1024))">Ax1024</li>
+    <li onclick="reqbuilder.edit.insert(string.rep('A',2048))">Ax2048</li>
+    <hr/>
+    <li onclick="reqbuilder.edit.insert(quickinject:getcustombof('A'))">Ax[N]...</li>
+    <li onclick="reqbuilder.edit.insert(quickinject:getcustombof('9'))">9x[N]...</li>
+    <li onclick="reqbuilder.edit.insert(quickinject:getcustombof(app.showinputdialog('Repeat string:','A')))">[N]x[N]...</li>
+   </menu>
+	</div>
+	<div #usefulstr class="button" style="behavior: ~ popup-menu;foreground-image: url(Huntpad.scx#images\icon_book.png);" titleid="for_usefulstr">6
+   <menu.popup id="usefulstrmenu">
+    <li style="foreground-image: url(Huntpad.scx#images\icon_dice.png);" onclick="reqbuilder.edit.insert(forge.randomstr(tonumber(app.showinputdialog('Length:','10')),'%u%l%d'))">Random String</li>
+    <li style="foreground-image: url(Huntpad.scx#images\icon_dice.png);" onclick="reqbuilder.edit.insert(math.random())">Random Number</li>
+    <hr/>
+    <li.num onclick="reqbuilder.edit.insert(os.time())">Current Time (UNIX)</li>
+    <li style="foreground-image: url(Huntpad.scx#images\icon_date.png);" onclick="reqbuilder.edit.insert(os.date('%x'))">Current Date</li>
+    <li.ip onclick="reqbuilder.edit.insert(quickinject.getmyip())">My IP Address</li>
+    <hr/>
+    <li>Math
+     <menu>
+     <li style="foreground-image: url(Huntpad.scx#images\icon_pi.png);" onclick="reqbuilder.edit.insert(math.pi)">Pi</li>
+     <li onclick="reqbuilder.edit.insert(forge.getfibseq(21))">Fibonacci sequence</li>
+    </menu>
+    </li>
+    <li>Character Sets
+    <menu>
+     <li onclick="reqbuilder.edit.insert('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')">Alphabet</li>
+     <li onclick="reqbuilder.edit.insert('A0B1C2D3E4f0g1h2i3j456789')">Alphanumeric</li>
+     <li.num onclick="reqbuilder.edit.insert('0123456789')">Numbers</li>
+     <li onclick="reqbuilder.edit.insert([[~!@#$%^&*()_+='`;,.:<>]])">Special Characters</li>
+    </menu>
+    </li>
+    <li style="foreground-image: url(Huntpad.scx#images\icon_lipsum.png);" onclick="reqbuilder.edit.insert(quickinject.usefulstrings.lorem_ipsum)">Lorem ipsum</li>
+   </menu>
+  </div>
+  
+<popup id="for_bof">Buffer Overflow</popup>
+<popup id="for_html">HTML</popup>
+<popup id="for_mysql">MySQL SQL Injection</popup>
+<popup id="for_textmanip">Text Manipulation</popup>
+<popup id="for_blindinj">Time-Based Blind Injection</popup>
+<popup id="for_encoding">Encoding</popup>
+<popup id="for_fileinc">File Inclusion</popup>
+<popup id="for_hex">Hex Convert</popup>
+<popup id="for_injection">SQL Injection</popup>
+<popup id="for_runjs">Run As JavaScript</popup>
+<popup id="for_usefulstr">Useful Strings</popup>
+<popup id="for_crypt">Encryption</popup>
+<popup id="for_ssjsi">Server-Side JavaScript Injection</popup>
+<popup id="for_xss">XSS</popup>

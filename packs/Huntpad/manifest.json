@@ -1,0 +1,11 @@
+{
+ "name": "Syhunt Huntpad Extension Pack",
+ "version": "file:Huntpad.exe",
+ "author": "Syhunt",
+ "compat": "v2",
+ "script": {
+  "filename": "padx.lua",
+  "init": "Huntpad:init()",
+  "afterinit": "Huntpad:afterinit()"
+ }
+}

@@ -1,0 +1,22 @@
+   <menu.popup id="textmanipmenu">
+    <li style="foreground-image: url(Resources.pak#16\icon_upper.png)" onclick="Sandcat.reqbuildermenu:run(string.upper)">Uppercase</li>
+    <li style="foreground-image: url(Resources.pak#16\icon_lower.png)" onclick="Sandcat.reqbuildermenu:run(string.lower)">Lowercase</li>
+    <li onclick="quickinject:run(forge.swapcase)">Swap Case</li>
+    <li onclick="quickinject:run(forge.titlecase)">Title Case</li>
+    <li onclick="quickinject:run(string.reverse)">Reverse</li>
+    <li onclick="quickinject:run(forge.shuffle)">Shuffle</li>
+    <hr/>
+    <li>Strip
+     <menu>
+     <li onclick="quickinject:run(quickinject.stripslashes)">Slashes</li>
+     <li onclick="quickinject:run(forge.stripspaces)">Spaces</li>
+     </menu>
+    </li>
+    <li onclick="quickinject:run(forge.addslashes)">Add Slashes</li>
+    <li onclick="quickinject:run(quickinject.getseparatedstring)">Separate Chars...</li>
+    <li>Miscellaneous
+     <menu>
+     <li onclick="quickinject:run(forge.soundex)">Soundex</li>
+     </menu>
+    </li>
+   </menu>

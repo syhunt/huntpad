@@ -1,0 +1,60 @@
+  <menu.popup id="encodemenu">
+    <li.do onclick="quickinject:run(ctk.url.encode)">URL Encode</li>
+    <li.do onclick="quickinject:run(ctk.url.encodefull)">URL Encode (Full)</li>
+    <li.undo onclick="quickinject:run(ctk.url.decode)">URL Decode</li>
+    <hr/>
+    <li>Hex Encode
+     <menu>
+      <li.hex onclick="quickinject:run(ctk.convert.strtohex)">String To Hex</li>
+      <li.hex onclick="quickinject:run(quickinject.strtohex_0xhex)">String To Hex (0xHEX)</li>
+      <li.hex onclick="quickinject:run(quickinject.strtohex_colonsep)">String To Hex (Colon-Separated)</li>
+      <li.hex onclick="quickinject:run(quickinject.strtohex_spaced)">String To Hex (Spaced)</li>
+      <hr/>
+      <li.hex onclick="quickinject:run(ctk.convert.inttohex)">Integer To Hex</li>
+     </menu>
+    </li>
+    <li>Hex Decode
+     <menu>
+      <li.str onclick="quickinject:run(ctk.convert.hextostr)">Hex To String</li>
+      <li.num onclick="quickinject:run(ctk.convert.hextoint)">Hex To Integer</li>
+     </menu>
+    </li>
+    <hr/>
+    <li>Base64 Encoding
+    <menu>
+     <li.do onclick="quickinject:run(ctk.base64.encode)">Base64 Encode</li>
+     <hr/>
+     <li.undo onclick="quickinject:run(ctk.base64.decode)">Base64 Decode</li>
+    </menu>
+    </li>
+    <li>CharCode Conversion
+     <menu>
+     <li.do onclick="quickinject:run(forge.strtocharcode)">String To CharCode(s)</li>
+     <hr/>
+     <li.undo onclick="quickinject:run(forge.charcodetostr)">CharCode(s) To String</li>
+     <!li onclick="quickinject:run(string.byte)"><!Char To CharCode><!/li>
+     <!li onclick="quickinject:run(string.char)"><!CharCode To Char><!/li>
+     </menu>
+    </li>
+    <li>IP Obfuscation
+     <menu>
+     <li onclick="quickinject:run(forge.iptodword)">IP To Dword</li>
+     <li onclick="quickinject:run(forge.iptohex)">IP To Hex</li>
+     <li onclick="quickinject:run(forge.iptooctal)">IP To Octal</li>
+     </menu>
+    </li>
+    <li>JavaScript Encode
+     <menu>
+     <li.script onclick="quickinject:run(forge.jsencode_hasegawa)">Non-Alphanumeric</li>
+     <li.script onclick="quickinject:run(forge.jsencode_jj)">Symbols (JJEncode)</li>
+     </menu>
+    </li>
+    <li>Miscellaneous
+     <menu>
+     <li style="foreground-image: url(Huntpad.scx#images\icon_binary.png)" onclick="quickinject:run(forge.strtobin)">String To Binary</li>
+     <hr/>
+     <li.num onclick="quickinject:run(forge.bintodec)">Binary To Decimal</li>
+     <li.str onclick="quickinject:run(forge.octaltostr)">Octal To String</li>
+     </menu>
+    </li>
+   </menu>

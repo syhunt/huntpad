@@ -1,0 +1,10 @@
+Version 1.0.2
+-------------
+* The entire source for Huntpad is now available on GitHub. Feel free to fork it,
+examine it, contribute code, send suggestions, report or fix issues.
+
+* Fixed: Swap Case option not working.
+
+Version 1.0.1
+-------------
+* Added syntax highlighting for Java files.
