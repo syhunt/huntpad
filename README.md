@@ -15,6 +15,7 @@ Huntpad is a notepad application with features that are particularly useful to p
 Compiled binaries for Windows can be downloaded from the links below.
 
 * [1.0.2 32-bit](http://www.syhunt.com/en/index.php?n=Tools.DownloadHuntpad)
+* [1.1.0 64-bit](http://www.syhunt.com/en/index.php?n=Tools.DownloadHuntpad) (coming soon)
 
 ## Compiling
 

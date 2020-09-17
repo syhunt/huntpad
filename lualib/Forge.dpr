@@ -8,7 +8,7 @@ uses
 
 procedure ExecResource(L: plua_State; const ResName: string);
 begin
-  plua_dostring(L, GetResourceAsString(ResName, 'LUA'));
+  plua_dostring(L, GetResourceAsString(ResName));
 end;
 
 function lua_getfile(L: plua_State): integer; cdecl;
@@ -16,7 +16,7 @@ var
   s: string;
 begin
   try
-    s := GetResourceAsString(lua_tostring(L, 2), 'FILES');
+    s := GetResourceAsString(lua_tostring(L, 2));
   except
   end;
   lua_pushstring(L, s);

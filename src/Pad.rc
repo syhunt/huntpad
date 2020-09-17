@@ -1,2 +1,2 @@
-HUNTPAD Lua "Huntpad.lua"
-HUNTPAD_TB HTML "html\toolbar.html"
+HUNTPAD RCDATA "Huntpad.lua"
+HUNTPAD_TB RCDATA "html\toolbar.html"

@@ -67,8 +67,8 @@ const
   cCaption = 'Huntpad';
   cUntitled = 'Untitled - '+cCaption;
   cAboutHuntPad = 'Syhunt Huntpad' +crlf+crlf+
-    'Version 1.0.2' +crlf+crlf+
-    'Copyright (c) 2018 Syhunt Application Security Company';
+    'Version 1.0.3' +crlf+crlf+
+    'Copyright (c) 2020 Syhunt Application Security Company';
   cHTML = 'HTML';
   cWinName = ' - Huntpad';
   cFilter = 'Text files (*.txt)|*.txt|' +
@@ -453,7 +453,7 @@ begin
   RegisterRequestBuilder(fLuaWrap.LuaState);
   RegisterActiveCodeEdit(fLuaWrap.LuaState);
   RegisterPrefs(fLuaWrap.LuaState);
-  fLuaWrap.ExecuteCmd(GetResourceAsString('HUNTPAD', 'Lua'));
+  fLuaWrap.ExecuteCmd(GetResourceAsString('HUNTPAD'));
   qcode := GetTextFileFromZIP(pluginsdir + 'Huntpad.scx',
     'quickinject/quickinject.lua');
   fLuaWrap.ExecuteCmd(qcode);
@@ -465,7 +465,7 @@ end;
 
 procedure THntpad.FormShow(Sender: TObject);
 begin
-  Tbmain.LoadHtml(GetResourceAsString('HUNTPAD_TB', cHTML), pluginsdir);
+  Tbmain.LoadHtml(GetResourceAsString('HUNTPAD_TB'), pluginsdir);
 end;
 
 end.
