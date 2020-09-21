@@ -1,31 +1,15 @@
+<link rel="stylesheet" type="text/css" href="Huntpad.scx#quickinject\toolbar.css">
 <style>
-@const ICON_SLEEP: url(Huntpad.scx#images\icon_tbinjection.png);
 
-li.info { foreground-image: url(Huntpad.scx#images\icon_info.png) } 
-li.user { foreground-image: url(Huntpad.scx#images\icon_user.png) } 
-li.users { foreground-image: url(Huntpad.scx#images\icon_users.png) } 
-li.tables { foreground-image: url(Huntpad.scx#images\icon_tables.png) } 
-li.table { foreground-image: url(Huntpad.scx#images\icon_table.png) } 
-li.columns { foreground-image: url(Huntpad.scx#images\icon_table.png) } 
-li.databases { foreground-image: url(Huntpad.scx#images\icon_databases.png) } 
-li.configfile { foreground-image: url(Huntpad.scx#images\icon_config.png) } 
-li.num { foreground-image: url(Huntpad.scx#images\icon_number.png) } 
-li.perc { foreground-image: url(Huntpad.scx#images\icon_percent.png) } 
-li.script { foreground-image: url(Huntpad.scx#images\icon_lang_javascript.png) } 
-li.run { foreground-image: url(Resources.pak#16\icon_exec.png) } 
-li.html { foreground-image: url(Resources.pak#16\icon_html.png) } 
-li.alert { foreground-image: url(Huntpad.scx#images\icon_alert.png) } 
-li.ip { foreground-image: url(Huntpad.scx#images\icon_ip.png) } 
-li.do { foreground-image: url(Resources.pak#16\icon_send.png) } 
-li.undo { foreground-image: url(Resources.pak#16\icon_undo_green.png) } 
-li.hex { foreground-image: url(Huntpad.scx#images\icon_hex.png) } 
-li.str { foreground-image: url(Huntpad.scx#images\icon_textfile.png) } 
 </style>
   <div .sepv />
 	<div .button style="foreground-image: url(Resources.pak#16\icon_plus_green.png)" onclick="Sandcat.reqbuildermenu:run(quickinject.addtosel)" titleid="for_addtosel"/>
 	<div .button style="foreground-image: url(Resources.pak#16\icon_minus.png)" onclick="Sandcat.reqbuildermenu:run(quickinject.subtosel)" titleid="for_subtosel"/>
 	<div #runjssep class="sepv" />
 	<div #runjsbtn class="button" style="foreground-image: url(Resources.pak#16\icon_exec.png)" onclick="quickinject:runjs()" titleid="for_runjs"/>
+	<div #runas class="button" style="behavior: ~ popup-menu;foreground-image: url(Resources.pak#16\icon_exec.png);" titleid="for_runas">6
+   <include src="Huntpad.scx#quickinject\toolbar_run.html"/>
+	</div>
 	<div .sepv />
 	<div #textmanip class="button" style="behavior: ~ popup-menu;foreground-image: url(Resources.pak#16\icon_text.png);" titleid="for_textmanip">6
    <include src="Huntpad.scx#quickinject\toolbar_text.html"/>
@@ -115,7 +99,8 @@ li.str { foreground-image: url(Huntpad.scx#images\icon_textfile.png) }
 <popup id="for_fileinc">File Inclusion</popup>
 <popup id="for_hex">Hex Convert</popup>
 <popup id="for_injection">SQL Injection</popup>
-<popup id="for_runjs">Run As JavaScript</popup>
+<popup id="for_runjs">Run As JavaScript In Loaded Page</popup>
+<popup id="for_runas">Run As...</popup>
 <popup id="for_usefulstr">Useful Strings</popup>
 <popup id="for_crypt">Encryption</popup>
 <popup id="for_ssjsi">Server-Side JavaScript Injection</popup>

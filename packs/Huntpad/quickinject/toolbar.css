@@ -1,0 +1,34 @@
+@const ICON_SLEEP: url(Huntpad.scx#images\icon_tbinjection.png);
+
+li.info { foreground-image: url(Huntpad.scx#images\icon_info.png) } 
+li.user { foreground-image: url(Huntpad.scx#images\icon_user.png) } 
+li.users { foreground-image: url(Huntpad.scx#images\icon_users.png) } 
+li.tables { foreground-image: url(Huntpad.scx#images\icon_tables.png) } 
+li.table { foreground-image: url(Huntpad.scx#images\icon_table.png) } 
+li.columns { foreground-image: url(Huntpad.scx#images\icon_table.png) } 
+li.databases { foreground-image: url(Huntpad.scx#images\icon_databases.png) } 
+li.configfile { foreground-image: url(Huntpad.scx#images\icon_config.png) } 
+li.num { foreground-image: url(Huntpad.scx#images\icon_number.png) } 
+li.perc { foreground-image: url(Huntpad.scx#images\icon_percent.png) } 
+li.run { foreground-image: url(Resources.pak#16\icon_exec.png) } 
+li.alert { foreground-image: url(Huntpad.scx#images\icon_alert.png) } 
+li.ip { foreground-image: url(Huntpad.scx#images\icon_ip.png) } 
+li.do { foreground-image: url(Resources.pak#16\icon_send.png) } 
+li.undo { foreground-image: url(Resources.pak#16\icon_undo_green.png) } 
+li.hex { foreground-image: url(Huntpad.scx#images\icon_hex.png) } 
+li.str { foreground-image: url(Huntpad.scx#images\icon_textfile.png) } 
+
+li.html { foreground-image: url(Resources.pak#16\icon_html.png) } 
+li.script { foreground-image: url(Huntpad.scx#images\icon_lang_javascript.png) } 
+li.jscript { foreground-image: url(Huntpad.scx#images\icon_lang_jscript.png) } 
+li.lua { foreground-image: url(Huntpad.scx#images\icon_lang_lua.png) } 
+li.nodejs { foreground-image: url(Huntpad.scx#images\icon_nodejs.png) }
+li.pascal { foreground-image: url(Huntpad.scx#images\icon_lang_pascal.png) }
+li.perl { foreground-image: url(Huntpad.scx#images\icon_lang_perl.png) } 
+li.php { foreground-image: url(Huntpad.scx#images\icon_lang_php.png) }
+li.python { foreground-image: url(Huntpad.scx#images\icon_lang_python.png) }
+li.ruby { foreground-image: url(Huntpad.scx#images\icon_lang_ruby.png) }
+li.tcl { foreground-image: url(Huntpad.scx#images\icon_lang_tcl.png) }
+li.tiscript { foreground-image: url(Huntpad.scx#images\icon_lang_tiscript.png) }
+li.vbscript { foreground-image: url(Huntpad.scx#images\icon_lang_vbscript.png) }
+li.v8 { foreground-image: url(Huntpad.scx#images\icon_v8.png) }

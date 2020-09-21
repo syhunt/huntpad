@@ -87,15 +87,34 @@ function quickinject.getmyip(func)
  return forge.myip()
 end
 
+function quickinject:getcode()
+ local code = reqbuilder.edit.getsel()
+ if code == '' then
+   code = reqbuilder.edit.gettext()
+ end
+ return code
+end
+
 function quickinject:runjs()
- local sel = reqbuilder.edit.getsel()
- if sel ~= '' then
-  tab:runjs(sel)
+ local code = self:getcode()
+ if code ~= '' then
+  tab:runjs(code)
  else
   if reqbuilder.request.url ~= '' then
    tab:runjs(reqbuilder.request.url)
   end
  end
+end
+
+function quickinject:runtis()
+ local code = self:getcode()
+  if code ~= '' then
+    if browser.navbar ~= nil then
+      browser.navbar:eval(code)
+    else
+      app.runtiscript(code)
+    end
+  end
 end
 
 function quickinject:crackhash(mode)
@@ -114,6 +133,16 @@ function quickinject:crackhash(mode)
    }
    end
   end
+ end
+end
+
+function quickinject:runas(lang)
+ local us = require 'Underscript.Runner'
+ local code = self:getcode()
+ console.clear()
+ local res = us.run[lang](code)
+ if res.success == false then
+   --app.showmessage('Failed: '..res.errormsg) 
  end
 end
 

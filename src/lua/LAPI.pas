@@ -13,6 +13,7 @@ uses SysUtils, Lua, Dialogs, ShellAPI;
 
 procedure RegisterApp(L: plua_State);
 procedure RegisterBrowser(L: plua_State);
+procedure RegisterConsole(L: plua_State);
 procedure RegisterRequestBuilder(L: plua_State);
 procedure RegisterActiveCodeEdit(L: plua_State);
 procedure RegisterPrefs(L: plua_State);
@@ -77,6 +78,47 @@ begin
   result := 1;
 end;
 
+function lua_console_writeln(L: plua_State): integer; cdecl;
+begin
+  editoutput.Visible := true;
+  editoutput.Lines.Add(plua_AnyToString(L, 1));
+  result := 1;
+end;
+
+function lua_console_write(L: plua_State): integer; cdecl;
+begin
+  editoutput.Visible := true;
+  editoutput.Lines.text := editoutput.Lines.text+plua_AnyToString(L, 1);
+  result := 1;
+end;
+
+function lua_scriptlogerror(L: plua_State): integer; cdecl;
+begin
+  editoutput.Visible := true;
+  editoutput.Lines.Add('('+inttostr(lua_tointeger(L, 1)+1)+'): '+lua_tostring(L, 2));
+  result := 1;
+end;
+
+function app_clearconsole(L: plua_State): integer; cdecl;
+begin
+  editoutput.Lines.Clear;
+  result := 1;
+end;
+
+function app_runtiscript(L: plua_State): integer; cdecl;
+var
+  str: widestring;
+  res: string;
+begin
+  str := lua_tostring(L, 1);
+  if Tbmain <> nil then
+  begin
+    res := Tbmain.eval(str);
+    lua_pushstring(L, res);
+  end;
+  result := 1;
+end;
+
 procedure RegisterRequestBuilder(L: plua_State);
 const
   sandcatbuilder_table: array [1 .. 1] of luaL_reg = (
@@ -98,17 +140,35 @@ begin
   lual_register(L, 'browser', @sandcatbrowser_table);
 end;
 
+procedure RegisterConsole(L: plua_State);
+const
+  console_table: array [1 .. 2] of luaL_reg = (
+  (name: 'clear'; func: app_clearconsole),
+  (name: nil; func: nil)
+  );
+begin
+  // register console library
+  lual_register(L, PAnsiChar('console'), @console_table);
+end;
+
 procedure RegisterApp(L: plua_State);
 const
-  app_table: array [1 .. 6] of luaL_reg = (
+  app_table: array [1 .. 7] of luaL_reg = (
   (name: 'exit'; func: app_exit),
   (name: 'getcurfilename'; func: app_getcurrentfilename),
+  (name: 'runtiscript'; func: app_runtiscript),
   (name: 'showabout'; func: app_showabout),
   (name: 'showinputdialog'; func: app_showinputdialog),
   (name: 'showmessage'; func: app_showmessage),
   (name: nil; func: nil)
   );
 begin
+  // for io redirect from Underscript.dll
+  lua_register(L, 'print', @lua_console_writeln);
+  lua_register(L, 'underscript_writeln', @lua_console_writeln);
+  lua_register(L, 'underscript_write', @lua_console_write);
+  lua_register(L, 'underscript_logerror', @lua_scriptlogerror);
+  // register app library
   lual_register(L, PAnsiChar('app'), @app_table);
   plua_setfieldvalue(L,'dir',extractfilepath(paramstr(0)));
   //plua_setfieldvalue(L,'datadir',GetAppDataDir);

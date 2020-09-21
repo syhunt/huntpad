@@ -2,6 +2,8 @@ package.path = package.path .. ";"..app.dir.."/Lib/lua/?.lua"
 --package.path = package.path .. ";"..app.datadir.."/Lib/lua/?.lua"
 package.cpath = package.cpath .. ";"..app.dir.."/Lib/clibs/?.dll"
 ctk = require "Catarinka"
+usrun = require "Underscript.Runner"
+usrun.options.redirectio = true
 require "Forge"
 
 local reqbuildermenu = {}

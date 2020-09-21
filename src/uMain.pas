@@ -53,6 +53,7 @@ var
   Hntpad: THntpad;
   Tbmain: TSciter;
   editmain: TCatSynEdit;
+  editoutput: TCatSynEdit;
   fLuaWrap: TLua;
   activememo: TCatSynEdit;
   Highlighters: TCatHighlighters;
@@ -83,7 +84,7 @@ const
 
 implementation
 
-uses CatRes, CatZIP, CatFiles, CatUI, CatJSON, LAPI, CatCLUtils;
+uses CatRes, CatZIP, CatFiles, CatUI, CatJSON, LAPI, CatUtils, CatCLUtils;
 
 {$R *.dfm}
 {$R Pad.res}
@@ -145,9 +146,11 @@ begin
   result := s;
 end;
 
-procedure ConfigSynEdit(s: TCatSynEdit);
+procedure ConfigSynEdit(s: TCatSynEdit;codeedit:boolean);
 begin
-  s.Gutter.ShowLineNumbers := true;
+  if codeedit = true then begin
+    s.Gutter.ShowLineNumbers := true;
+  end;
   s.Gutter.Font.Color := $00808080;
   s.Gutter.Font.Size := 8;
   s.Gutter.Color := $00F0F0F0;
@@ -273,8 +276,9 @@ end;
 
 procedure THntpad.StdErr(ASender: TObject; const Msg: WideString);
 begin
-  // if pos('assuming namespace declaration', string(msg)) = 0 then
+  //if pos('assuming namespace declaration', string(msg)) = 0 then
   // Debug(msg, 'TIS Warning');
+  OutDebug('TIScript: '+Msg);
 end;
 
 procedure THntpad.StdOut(ASender: TObject; const Msg: WideString);
@@ -282,6 +286,10 @@ var
   d: TCatJSON;
   cmd: string;
 begin
+  if beginswith(Msg, '{') = false then begin
+    editoutput.Visible := true;
+    editoutput.Lines.Add(msg);
+  end;
   if beginswith(Msg, '{') = false then
     exit;
   d := TCatJSON.Create;
@@ -441,14 +449,20 @@ begin
   editmain := TCatSynEdit.Create(self);
   editmain.Parent := self;
   editmain.Align := alClient;
-  ConfigSynEdit(editmain);
+  ConfigSynEdit(editmain, true);
   activememo := editmain;
+  editoutput := TCatSynEdit.Create(self);
+  editoutput.Parent := self;
+  editoutput.Align := alBottom;
+  editoutput.Visible := false;
+  ConfigSynEdit(editmain, false);
   Highlighters := TCatHighlighters.Create(self);
   // lua engine creation
   fLuaWrap := TLua.Create(nil);
   fLuaWrap.UseDebug := false;
   fLuaWrap.OnException := ScriptExceptionHandler;
   RegisterApp(fLuaWrap.LuaState);
+  RegisterConsole(fLuaWrap.LuaState);
   RegisterBrowser(fLuaWrap.LuaState);
   RegisterRequestBuilder(fLuaWrap.LuaState);
   RegisterActiveCodeEdit(fLuaWrap.LuaState);
