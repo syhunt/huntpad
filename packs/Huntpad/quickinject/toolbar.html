@@ -7,6 +7,7 @@
 	<div .button style="foreground-image: url(Resources.pak#16\icon_minus.png)" onclick="Sandcat.reqbuildermenu:run(quickinject.subtosel)" titleid="for_subtosel"/>
 	<div #runjssep class="sepv" />
 	<div #runjsbtn class="button" style="foreground-image: url(Resources.pak#16\icon_exec.png)" onclick="quickinject:runjs()" titleid="for_runjs"/>
+	<div #runedtbtn class="button" style="foreground-image: url(Resources.pak#16\icon_exec.png)" onclick="quickinject:runeditorscript()" titleid="for_runedtscript"/>	
 	<div #runas class="button" style="behavior: ~ popup-menu;foreground-image: url(Resources.pak#16\icon_exec.png);" titleid="for_runas">6
    <include src="Huntpad.scx#quickinject\toolbar_run.html"/>
 	</div>
@@ -99,6 +100,7 @@
 <popup id="for_fileinc">File Inclusion</popup>
 <popup id="for_hex">Hex Convert</popup>
 <popup id="for_injection">SQL Injection</popup>
+<popup id="for_runedtscript">Run Loaded Script</popup>
 <popup id="for_runjs">Run As JavaScript In Loaded Page</popup>
 <popup id="for_runas">Run As...</popup>
 <popup id="for_usefulstr">Useful Strings</popup>

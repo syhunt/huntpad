@@ -19,6 +19,7 @@ function lua_activecodeedit_paste(L: PLua_State): integer; cdecl;
 function lua_activecodeedit_undo(L: PLua_State): integer; cdecl;
 function lua_activecodeedit_redo(L: PLua_State): integer; cdecl;
 function lua_activecodeedit_getseltext(L: PLua_State): integer; cdecl;
+function lua_activecodeedit_getfilename(L: PLua_State): integer; cdecl
 function lua_activecodeedit_replacesel(L: PLua_State): integer; cdecl;
 function lua_activecodeedit_inserttext(L: PLua_State): integer; cdecl;
 function lua_activecodeedit_setfocus(L: PLua_State): integer; cdecl;
@@ -38,7 +39,7 @@ function lua_activecodeedit_new(L: PLua_State): integer; cdecl;
 begin
   if ActiveMemo <> nil then
     ActiveMemo.Clear;
-  currentfilename := emptystr;
+  editmain.filename := emptystr;
   hntpad.Caption := cUntitled;
   lasttext := emptystr;
   result := 1;
@@ -106,6 +107,15 @@ begin
   else
     lua_pushstring(L, emptystr);
   result := 1;
+end;
+
+function lua_activecodeedit_getfilename(L: PLua_State): integer; cdecl;
+begin
+  if ActiveMemo <> nil then
+   lua_pushstring(L, ActiveMemo.Filename)
+  else
+   lua_pushstring(L, emptystr);
+ result := 1;
 end;
 
 function lua_activecodeedit_replacesel(L: PLua_State): integer; cdecl;
@@ -185,7 +195,7 @@ end;
 
 function lua_activecodeedit_savetofile(L: plua_State): Integer; cdecl;
 begin
-   Hntpad.SaveToFile(currentfilename);
+   Hntpad.SaveToFile(editmain.filename);
 end;
 
 end.

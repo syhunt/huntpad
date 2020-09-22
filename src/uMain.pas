@@ -58,7 +58,6 @@ var
   activememo: TCatSynEdit;
   Highlighters: TCatHighlighters;
   progdir, pluginsdir: string;
-  currentfilename: string;
   lasttext: string;
   Fselpos: Integer;
   Prefs: TCatPreferences;
@@ -166,10 +165,9 @@ procedure THntpad.LoadFromFile(fn: string);
 begin
   if fileexists(fn) = false then
     exit;
-  editmain.Highlighter := Highlighters.GetByFileExtension(extractfileext(fn));
-  editmain.Lines.LoadFromFile(fn);
+  editmain.Highlighter := Highlighters.GetByFilename(fn);
+  editmain.LoadFromFile(fn);
   lasttext := editmain.Lines.Text;
-  currentfilename := fn;
   caption := extractfilename(fn) + cWinName;
 end;
 
@@ -223,7 +221,8 @@ begin
   begin
     editmain.Lines.SaveToFile(sd.FileName);
     caption := extractfilename(sd.FileName) + cWinName;
-    currentfilename := sd.FileName;
+    editmain.Filename := sd.FileName;
+    lasttext := editmain.Lines.Text;
   end;
   sd.free;
 end;
@@ -232,14 +231,15 @@ procedure THntpad.SaveToFile(fn: string);
 var
   f: string;
 begin
-  f := currentfilename;
+  f := editmain.Filename;
   f := replacestr(f, '\\', '\');
-  if currentfilename = emptystr then
+  if editmain.Filename = emptystr then
     SaveAs(emptystr)
   else
   begin
-    editmain.Lines.SaveToFile(currentfilename);
+    editmain.SaveToFile;
     caption := extractfilename(fn) + cWinName;
+    lasttext := editmain.Lines.Text;
   end;
 end;
 
@@ -412,8 +412,8 @@ var
   bs : Integer; msg:string;
 begin
   CanClose := true;
-  if currentfilename <> emptystr then
-   msg := 'Save changes to "'+currentfilename+'"?'
+  if editmain.filename <> emptystr then
+   msg := 'Save changes to "'+editmain.filename+'"?'
   else
    msg := 'Save changes?';
 
@@ -421,7 +421,7 @@ begin
     bs := messagedlg(msg,mtCustom,
                               [mbYes,mbNo,mbCancel], 0);
     case bs of
-     mrYes: SaveToFile(currentfilename);
+     mrYes: SaveToFile(editmain.filename);
      mrNo: ;
      mrCancel: CanClose := false;
     end;
@@ -455,6 +455,7 @@ begin
   editoutput.Parent := self;
   editoutput.Align := alBottom;
   editoutput.Visible := false;
+  editoutput.ReadOnly := true;
   ConfigSynEdit(editmain, false);
   Highlighters := TCatHighlighters.Create(self);
   // lua engine creation

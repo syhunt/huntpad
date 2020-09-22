@@ -1,17 +1,18 @@
 <menu.popup id="runasmenu">
  <li .script>JavaScript
   <menu>
-  <li #runjslp .jscript onclick="quickinject:runjs()">JS in Loaded Page</li>  
+  <li #runjslp .jscript onclick="quickinject:runjs()">V8 (Loaded Page)</li>  
+  <li .nodejs onclick="quickinject:runas('jsnode')">V8 (Node.js)</li>
+  <li .v8 onclick="quickinject:runas('jsv8')">V8 (Pure)</li>   
   <li .jscript onclick="quickinject:runas('jscript')">JScript</li>
-  <hr/>  
-  <li .nodejs onclick="quickinject:runas('jsnode')">Node.js</li>
-  <li .v8 onclick="quickinject:runas('jsv8')">V8 (Pure)</li> 
-  <li .tiscript onclick="quickinject:runtis()">TIScript</li>
+  <hr/> 
+  <li .tiscript onclick="quickinject:runtis()">TIScript (This App)</li>
+  <li .tiscript onclick="quickinject:runas('tiscript')">TIScript</li>  
   </menu>
  </li> 
  <li .lua>Lua
   <menu>
-  <li onclick="quickinject:runas('luain')">Lua 5.1 (This Thread)</li>
+  <li onclick="quickinject:runas('luain')">Lua 5.1 (This App)</li>
   <li onclick="quickinject:runas('luav51')">Lua 5.1</li>  
   <li onclick="quickinject:runas('luajit')">LuaJIT 2.1 (Lua 5.1)</li>
   <hr/>

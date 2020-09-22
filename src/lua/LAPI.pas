@@ -46,7 +46,7 @@ end;
 
 function app_getcurrentfilename(L: plua_State): Integer; cdecl;
 begin
-  lua_pushstring(L, currentfilename);
+  lua_pushstring(L, editmain.filename);
   result := 1;
 end;
 
@@ -155,7 +155,7 @@ procedure RegisterApp(L: plua_State);
 const
   app_table: array [1 .. 7] of luaL_reg = (
   (name: 'exit'; func: app_exit),
-  (name: 'getcurfilename'; func: app_getcurrentfilename),
+  (name: 'getfilename'; func: app_getcurrentfilename),
   (name: 'runtiscript'; func: app_runtiscript),
   (name: 'showabout'; func: app_showabout),
   (name: 'showinputdialog'; func: app_showinputdialog),
@@ -176,10 +176,11 @@ end;
 
 procedure RegisterActiveCodeEdit(L: plua_State);
 const
-  sandcatcodeedit_table: array [1 .. 18] of luaL_reg = (
+  sandcatcodeedit_table: array [1 .. 19] of luaL_reg = (
   (name: 'new'; func: lua_activecodeedit_new),
   (name: 'find'; func: lua_activecodeedit_find),
   (name: 'replace'; func: lua_activecodeedit_replace),
+  (name: 'getfilename'; func: lua_activecodeedit_getfilename),
   (name: 'gettext'; func: lua_activecodeedit_gettext),
   (name: 'settext'; func: lua_activecodeedit_settext),
   (name: 'getsel'; func: lua_activecodeedit_getseltext),

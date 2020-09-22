@@ -146,6 +146,22 @@ function quickinject:runas(lang)
  end
 end
 
+-- Runs the code in editor based on the filename extension
+function quickinject:runeditorscript()
+ local us = require 'Underscript.Runner'
+ local code = self:getcode()
+ console.clear()
+ local ext = ctk.file.getext(reqbuilder.edit.getfilename())
+ if ext ~= '' then
+   local runfunc = us.runext[ext]
+   if runfunc ~= nil then
+     runfunc(code)
+   else
+     app.showmessage(ext:upper()..': not able to run this code language! ')
+   end
+ end
+end
+
 function quickinject:runhash(algo)
  require 'Underscript'
  local sel = reqbuilder.edit.getsel()
