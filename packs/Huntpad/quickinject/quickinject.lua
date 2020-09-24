@@ -1,3 +1,5 @@
+require 'Underscript'
+
 quickinject = {}
 quickinject.opt_shellurl = 'quickinject.shell.php.url'
 quickinject.opt_shelloutput = 'quickinject.shell.php.out'
@@ -117,6 +119,13 @@ function quickinject:runtis()
   end
 end
 
+function quickinject:runlua()
+ local code = self:getcode()
+  if code ~= '' then
+    browser.dostring(code)
+  end
+end
+
 function quickinject:crackhash(mode)
  local sel = reqbuilder.edit.getsel()
  if sel ~= '' then
@@ -140,10 +149,14 @@ function quickinject:runas(lang)
  local us = require 'Underscript.Runner'
  local code = self:getcode()
  console.clear()
- local res = us.run[lang](code)
- if res.success == false then
-   --app.showmessage('Failed: '..res.errormsg) 
- end
+ res = us.run[lang](code)
+end
+
+function quickinject:runas32(lang)
+ local us = require 'Underscript.Runner'
+ local code = self:getcode()
+ console.clear()
+ res = us.run32[lang](code)
 end
 
 -- Runs the code in editor based on the filename extension
@@ -152,8 +165,15 @@ function quickinject:runeditorscript()
  local code = self:getcode()
  console.clear()
  local ext = ctk.file.getext(reqbuilder.edit.getfilename())
+ ext = ext:lower()
  if ext ~= '' then
    local runfunc = us.runext[ext]
+   if ext == '.lua' then
+     runfunc = browser.dostring
+   end
+   if ext == '.spell' then
+     runfunc = browser.dostring
+   end   
    if runfunc ~= nil then
      runfunc(code)
    else

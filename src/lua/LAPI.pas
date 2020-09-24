@@ -68,6 +68,12 @@ begin
   result := 1;
 end;
 
+function browser_dostring(L: plua_State): Integer; cdecl;
+begin
+  fLuaWrap.ExecuteCmd(lua_tostring(L, 1));
+  result := 1;
+end;
+
 function lua_sandcatsettings_get(L: plua_State): integer; cdecl;
 begin
   if lua_isnone(L, 2) then
@@ -80,22 +86,23 @@ end;
 
 function lua_console_writeln(L: plua_State): integer; cdecl;
 begin
-  editoutput.Visible := true;
-  editoutput.Lines.Add(plua_AnyToString(L, 1));
+  Hntpad.AddOutput(plua_AnyToString(L, 1));
   result := 1;
 end;
 
 function lua_console_write(L: plua_State): integer; cdecl;
 begin
-  editoutput.Visible := true;
+  if editoutput.Visible = false then
+    editoutput.Visible := true;
   editoutput.Lines.text := editoutput.Lines.text+plua_AnyToString(L, 1);
   result := 1;
 end;
 
 function lua_scriptlogerror(L: plua_State): integer; cdecl;
+var msg:string;
 begin
-  editoutput.Visible := true;
-  editoutput.Lines.Add('('+inttostr(lua_tointeger(L, 1)+1)+'): '+lua_tostring(L, 2));
+  msg := '('+inttostr(lua_tointeger(L, 1)+1)+'): '+lua_tostring(L, 2);
+  Hntpad.AddOutput(msg);
   result := 1;
 end;
 
@@ -132,7 +139,8 @@ end;
 
 procedure RegisterBrowser(L: plua_State);
 const
-  sandcatbrowser_table: array [1 .. 2] of luaL_reg = (
+  sandcatbrowser_table: array [1 .. 3] of luaL_reg = (
+  (name: 'dostring'; func: browser_dostring),
   (name: 'newtab'; func: browser_newtab),
   (name: nil; func: nil)
   );
@@ -142,13 +150,24 @@ end;
 
 procedure RegisterConsole(L: plua_State);
 const
-  console_table: array [1 .. 2] of luaL_reg = (
+  console_table: array [1 .. 4] of luaL_reg = (
   (name: 'clear'; func: app_clearconsole),
+  (name: 'writeln'; func: lua_console_writeln),
+  (name: 'write'; func: lua_console_write),
+  (name: nil; func: nil)
+  );
+const
+  uconsole_table: array [1 .. 4] of luaL_reg = (
+  (name: 'writeln'; func: lua_console_writeln),
+  (name: 'write'; func: lua_console_write),
+  (name: 'errorln'; func: lua_scriptlogerror),
   (name: nil; func: nil)
   );
 begin
   // register console library
   lual_register(L, PAnsiChar('console'), @console_table);
+  // register uconsole library for io redirect from Underscript.dll
+  lual_register(L, PAnsiChar('uconsole'), @uconsole_table);
 end;
 
 procedure RegisterApp(L: plua_State);
@@ -163,11 +182,7 @@ const
   (name: nil; func: nil)
   );
 begin
-  // for io redirect from Underscript.dll
   lua_register(L, 'print', @lua_console_writeln);
-  lua_register(L, 'underscript_writeln', @lua_console_writeln);
-  lua_register(L, 'underscript_write', @lua_console_write);
-  lua_register(L, 'underscript_logerror', @lua_scriptlogerror);
   // register app library
   lual_register(L, PAnsiChar('app'), @app_table);
   plua_setfieldvalue(L,'dir',extractfilepath(paramstr(0)));

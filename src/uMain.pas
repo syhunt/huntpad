@@ -2,13 +2,13 @@ unit uMain;
 
 {
   Syhunt Huntpad
-  Copyright (c) 2018, Syhunt Informatica
+  Copyright (c) 2018-2020, Syhunt Informatica
 
   License: 3-clause BSD license
   See https://github.com/felipedaragon/huntpad/ for details.
 
   This software uses the Catarinka components. Catarinka is distributed under
-  the same license as Huntpad. Copyright (c) 2003-2018, Felipe Daragon
+  the same license as Huntpad. Copyright (c) 2003-2020, Felipe Daragon
 }
 
 interface
@@ -44,6 +44,7 @@ type
     procedure Save;
   public
     { Public declarations }
+    procedure AddOutput(const s:string);
     procedure LoadFromFile(fn: string);
     procedure SaveToFile(fn: string);
     procedure SaveAs(fn: string);
@@ -76,6 +77,10 @@ const
     'JavaScript files (*.js, *.tis)|*.js;*.tis|' + 'JSON files (*.json)|*.json|' +
     'Java files (*.java)|*.java|' +
     'PHP files (*.php*)|*.php*|' + 'Ruby files (*.rb)|*.rb|' +
+    'C files (*.c, *.h)|*.c;*.h|' +
+    'C++ files (*.cpp, *.cc, *.cxx)|*.cpp;*.cc;*.cxx|' +
+    'C++ header files (*.hpp, *.hxx, *.hh)|*.hpp;*.hxx;*.hh|' +
+    'C# files (*.cs)|*.cs|' +
     'Pascal files (*.pas, *.dpr)|*.pas;*.dpr|' + 'Perl files (*.pl)|*.pl|' +
     'Python files (*.py)|*.py|' + 'SQL files (*.sql)|*.sql|' +
     'VBScript files (*.vbs)|*.vbs|' + 'XML files (*.xml)|*.xml|' +
@@ -270,7 +275,7 @@ end;
 procedure THntpad.ScriptExceptionHandler(Title: string; line: Integer;
   Msg: string; var handled: boolean);
 begin
-  showmessage(inttostr(line) + format('%s: %s', [Title, Msg]));
+  AddOutput(inttostr(line) + format('%s: %s', [Title, Msg]));
   handled := true;
 end;
 
@@ -281,15 +286,20 @@ begin
   OutDebug('TIScript: '+Msg);
 end;
 
+procedure THntpad.AddOutput(const s:string);
+begin
+  if editoutput.Visible = false then
+    editoutput.Visible := true;
+  editoutput.Lines.Add(s);
+end;
+
 procedure THntpad.StdOut(ASender: TObject; const Msg: WideString);
 var
   d: TCatJSON;
   cmd: string;
 begin
-  if beginswith(Msg, '{') = false then begin
-    editoutput.Visible := true;
-    editoutput.Lines.Add(msg);
-  end;
+  if beginswith(Msg, '{') = false then
+    AddOutput(msg);
   if beginswith(Msg, '{') = false then
     exit;
   d := TCatJSON.Create;
