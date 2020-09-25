@@ -19,6 +19,7 @@ li.hex { foreground-image: url(Huntpad.scx#images\icon_hex.png) }
 li.str { foreground-image: url(Huntpad.scx#images\icon_textfile.png) } 
 
 li.html { foreground-image: url(Resources.pak#16\icon_html.png) } 
+li.java { foreground-image: url(Huntpad.scx#images\icon_lang_java.png) } 
 li.script { foreground-image: url(Huntpad.scx#images\icon_lang_javascript.png) } 
 li.jscript { foreground-image: url(Huntpad.scx#images\icon_lang_jscript.png) } 
 li.lua { foreground-image: url(Huntpad.scx#images\icon_lang_lua.png) } 

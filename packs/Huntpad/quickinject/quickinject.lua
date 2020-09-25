@@ -120,6 +120,7 @@ function quickinject:runtis()
 end
 
 function quickinject:runlua()
+  console.clear()
  local code = self:getcode()
   if code ~= '' then
     browser.dostring(code)
@@ -145,18 +146,10 @@ function quickinject:crackhash(mode)
  end
 end
 
-function quickinject:runas(lang)
- local us = require 'Underscript.Runner'
+function quickinject:runas(func)
  local code = self:getcode()
  console.clear()
- res = us.run[lang](code)
-end
-
-function quickinject:runas32(lang)
- local us = require 'Underscript.Runner'
- local code = self:getcode()
- console.clear()
- res = us.run32[lang](code)
+ res = func(code)
 end
 
 -- Runs the code in editor based on the filename extension
