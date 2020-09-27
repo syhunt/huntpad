@@ -28,8 +28,8 @@ uses uMain, pLua, pLuaTable, LAPI_CodeEditor;
 
 function app_showmessage(L: plua_State): Integer; cdecl;
 begin
-  ShowMessage(lua_tostring(L, 1));
-  result := 1;
+  if plua_validateargs(L, result, [LUA_TSTRING]).OK then
+    ShowMessage(lua_tostring(L, 1));
 end;
 
 function app_showabout(L: plua_State): Integer; cdecl;
@@ -54,24 +54,25 @@ function app_showinputdialog(L: plua_State): Integer; cdecl;
 var
   s, caption: string;
 begin
-  caption := lua_tostring(L, 3);
-  if caption = emptystr then
-    caption := 'Huntpad';
-  s := inputbox(caption, lua_tostring(L, 1), lua_tostring(L, 2));
-  lua_pushstring(L, s);
-  result := 1;
+ if plua_validateargs(L, result, [LUA_TSTRING, LUA_TSTRING, LUA_TSTRING],[vaOptional2]).OK then begin
+   caption := lua_tostring(L, 3);
+   if caption = emptystr then
+     caption := 'Huntpad';
+   s := inputbox(caption, lua_tostring(L, 1), lua_tostring(L, 2));
+   lua_pushstring(L, s);
+  end;
 end;
 
 function browser_newtab(L: plua_State): Integer; cdecl;
 begin
-  ShellExecute(0, 'open', pWideChar(lua_tostring(L, 1)), '', '', 1);
-  result := 1;
+  if plua_validateargs(L, result, [LUA_TSTRING]).OK then
+    ShellExecute(0, 'open', pWideChar(lua_tostring(L, 1)), '', '', 1);
 end;
 
 function browser_dostring(L: plua_State): Integer; cdecl;
 begin
-  fLuaWrap.ExecuteCmd(lua_tostring(L, 1));
-  result := 1;
+  if plua_validateargs(L, result, [LUA_TSTRING]).OK then
+    fLuaWrap.ExecuteCmd(lua_tostring(L, 1));
 end;
 
 function lua_sandcatsettings_get(L: plua_State): integer; cdecl;
@@ -101,9 +102,10 @@ end;
 function lua_scriptlogerror(L: plua_State): integer; cdecl;
 var msg:string;
 begin
-  msg := '('+inttostr(lua_tointeger(L, 1)+1)+'): '+lua_tostring(L, 2);
-  Hntpad.AddOutput(msg);
-  result := 1;
+  if plua_validateargs(L, result, [LUA_TNUMBER, LUA_TSTRING]).OK then begin
+   msg := '('+inttostr(lua_tointeger(L, 1)+1)+'): '+lua_tostring(L, 2);
+   Hntpad.AddOutput(msg);
+  end;
 end;
 
 function app_clearconsole(L: plua_State): integer; cdecl;
@@ -117,13 +119,14 @@ var
   str: widestring;
   res: string;
 begin
-  str := lua_tostring(L, 1);
-  if Tbmain <> nil then
-  begin
-    res := Tbmain.eval(str);
-    lua_pushstring(L, res);
+  if plua_validateargs(L, result, [LUA_TSTRING]).OK then begin
+   str := lua_tostring(L, 1);
+   if Tbmain <> nil then
+   begin
+     res := Tbmain.eval(str);
+     lua_pushstring(L, res);
+   end;
   end;
-  result := 1;
 end;
 
 procedure RegisterRequestBuilder(L: plua_State);

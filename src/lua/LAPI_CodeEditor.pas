@@ -79,14 +79,13 @@ end;
 
 function lua_activecodeedit_inserttext(L: PLua_State): integer; cdecl;
 begin
-  if ActiveMemo <> nil then
-    ActiveMemo.SelText := lua_tostring(L, 1);
-  result := 1;
+  if plua_validateargs(L, result, [LUA_TSTRING]).OK and (ActiveMemo <> nil) then
+     ActiveMemo.SelText := lua_tostring(L, 1);
 end;
 
 function lua_activecodeedit_settext(L: PLua_State): integer; cdecl;
 begin
-  if ActiveMemo <> nil then
+  if plua_validateargs(L, result, [LUA_TSTRING]).OK and (ActiveMemo <> nil) then
     ActiveMemo.lines.Text := lua_tostring(L, 1);
   result := 1;
 end;
@@ -120,12 +119,11 @@ end;
 
 function lua_activecodeedit_replacesel(L: PLua_State): integer; cdecl;
 begin
-  if ActiveMemo <> nil then
+  if plua_validateargs(L, result, [LUA_TSTRING]).OK and (ActiveMemo <> nil) then
   begin
     if ActiveMemo.SelText <> emptystr then
       ActiveMemo.SelText := lua_tostring(L, 1);
   end;
-  result := 1;
 end;
 
 function lua_activecodeedit_copy(L: PLua_State): integer; cdecl;
@@ -172,18 +170,15 @@ var
   sd: topendialog;
   f: string;
 begin
-  f := emptystr;//lua_tostring(L, 3);
+  f := emptystr;
   f := replacestr(f, '\\', '\');
   sd := topendialog.Create(Hntpad);
   sd.InitialDir := emptystr;
-  sd.DefaultExt := 'txt';//lua_tostring(L, 2); // eg 'cfg'
+  sd.DefaultExt := 'txt';
   sd.FileName := f;
   sd.Filter :=  cFilter;
   if sd.execute then
     Hntpad.LoadFromFile(sd.filename);
-    //lua_pushstring(L, sd.FileName)
-  //else
-  //  lua_pushstring(L, emptystr);
   sd.free;
   result := 1;
 end;
