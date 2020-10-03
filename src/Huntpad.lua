@@ -24,7 +24,8 @@ end
 function reqbuildermenu:run(func)
  local sel = reqbuilder.edit.getsel()
  if sel ~= '' then
-  reqbuilder.edit.replacesel(func(sel))
+  local res = func(sel)
+  reqbuilder.edit.replacesel(res)
  else
   app.showmessage(reqbuildermenu.msgnotext)
  end

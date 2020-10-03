@@ -3,12 +3,7 @@ library Forge;
 uses
   Lua, pLuaMin, CatResMin;
   
- // Reduces exe size
-{$IFDEF RELEASE}
-{$WEAKLINKRTTI ON}
-{$RTTI EXPLICIT METHODS([]) PROPERTIES([]) FIELDS([])}
-{$ENDIF}
- // Reduces exe size end
+{$I CatCompactLib.inc}
 
 {$R *.res}
 {$R Code.res}

@@ -1,39 +1,33 @@
 <menu.popup id="runasmenu">
  <li .script>JavaScript
-  <menu>
-  <li #runjslp .jscript onclick="quickinject:runjs()">V8 (Loaded Page)</li>  
-  <li .nodejs onclick="quickinject:runas(_script.js.node)">V8 (Node.js)</li>
-  <li .v8 onclick="quickinject:runas(_script.js.v8)">V8 (Pure)</li>
+  <menu #runasmenujs>
+  <li #runjslp .v8 onclick="quickinject:runjs()">In Loaded Page (Chromium + V8)</li>     
+  <hr #runjslpsep></hr>  
   <li .jscript onclick="quickinject:runas(_script.jscript)">JScript</li>
-  <li onclick="quickinject:runas(_script.js.core)">JavaScriptCore</li> 
+  <li onclick="quickinject:runas(_script.js.quick)">QuickJS</li>  
   <li onclick="quickinject:runas(_script.js.spider)">SpiderMonkey</li>  
-  <li onclick="quickinject:runas(_script.js.quick)">QuickJS</li>
-  <hr/> 
-  <li .tiscript onclick="quickinject:runtis()">TIScript (This App)</li>
-  <li .tiscript onclick="quickinject:runas(_script.js.tiscript)">TIScript</li>  
+  <include src="HuntScript.scx#quickinject\toolbar_run_extrajs.html"/>
   </menu>
  </li> 
+ <li .tiscript>JavaScript++
+  <menu>
+  <li .tiscript onclick="quickinject:runtis()">TIScript (This App)</li>
+  <hr/>   
+  <li .tiscript onclick="quickinject:runas(_script.jspp.tiscript)">TIScript</li>    
+  </menu>
+ </li>    
  <li .java onclick="quickinject:runas(_script.java)">Java</li>
  <li .lua>Lua
-  <menu>
-  <li onclick="quickinject:runlua()">Lua 5.1 (This App)</li>
+  <menu #runasmenulua>
+  <li onclick="quickinject:runlua()">Lua 5.1 x64 (This App)</li>
   <hr/>  
-  <li onclick="quickinject:runas(_script.lua.v51)">Lua 5.1</li> 
-  <li onclick="quickinject:runas(_script.lua.jit)">LuaJIT 2.1 (Lua 5.1)</li>
-  <hr/>
-  <li onclick="quickinject:runas(_script.lua.v52)">Lua 5.2</li>   
-  <li onclick="quickinject:runas(_script.lua.v53)">Lua 5.3</li>  
-  <li onclick="quickinject:runas(_script.lua.v54)">Lua 5.4</li>    
-  <hr/>  
-  <li onclick="quickinject:runas(_script.luascript32)">Lua 5.1 (32-bit)</li>    
+  <li onclick="quickinject:runas(_script.lua.v51)">Lua 5.1 x64</li>
+  <include src="HuntScript.scx#quickinject\toolbar_run_extralua.html"/>
   </menu>
- </li>  
+ </li>
  <li .php onclick="quickinject:runas(_script.php)">PHP</li>
- <li .python onclick="quickinject:runas(_script.python)">Python</li>
- <li .ruby onclick="quickinject:runas(_script.ruby)">Ruby</li>
  <hr/>
+ <include src="HuntScript.scx#quickinject\toolbar_run_extra.html"/> 
  <li .pascal onclick="quickinject:runas(_script.pascalscript)">Pascal</li>
- <li .perl onclick="quickinject:runas(_script.perl)">Perl</li> 
- <li .tcl onclick="quickinject:runas(_script.tcl)">Tcl</li>
  <li .vbscript onclick="quickinject:runas(_script.vbscript)">VBScript</li>  
 </menu>

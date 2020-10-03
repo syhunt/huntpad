@@ -1,4 +1,5 @@
 require 'Underscript'
+require 'Forge'
 
 quickinject = {}
 quickinject.opt_shellurl = 'quickinject.shell.php.url'
@@ -26,7 +27,6 @@ function quickinject:add()
  reqbuilder.toolbar:addhtmlfile('#toolbar','Huntpad.scx#quickinject/toolbar.html')
  prefs.regdefault(quickinject.opt_shellurl,'http://somehost/shell.txt')
  prefs.regdefault(quickinject.opt_shelloutput,'shell.php')
- require "Forge"
 end
 
 function quickinject:editprefs()
@@ -80,12 +80,10 @@ function quickinject:viewsheet(filename)
 end
 
 function quickinject:run(func)
- require 'Underscript'
  Sandcat.reqbuildermenu:run(func)
 end
 
 function quickinject.getmyip(func)
- require 'Underscript'
  return forge.myip()
 end
 
@@ -164,9 +162,6 @@ function quickinject:runeditorscript()
    if ext == '.lua' then
      runfunc = browser.dostring
    end
-   if ext == '.spell' then
-     runfunc = browser.dostring
-   end   
    if runfunc ~= nil then
      runfunc(code)
    else
@@ -176,7 +171,6 @@ function quickinject:runeditorscript()
 end
 
 function quickinject:runhash(algo)
- require 'Underscript'
  local sel = reqbuilder.edit.getsel()
  if sel ~= '' then
   reqbuilder.edit.replacesel(forge.hash(algo,sel))

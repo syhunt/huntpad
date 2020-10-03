@@ -23,6 +23,7 @@ li.java { foreground-image: url(Huntpad.scx#images\icon_lang_java.png) }
 li.script { foreground-image: url(Huntpad.scx#images\icon_lang_javascript.png) } 
 li.jscript { foreground-image: url(Huntpad.scx#images\icon_lang_jscript.png) } 
 li.lua { foreground-image: url(Huntpad.scx#images\icon_lang_lua.png) } 
+li.luajit { foreground-image: url(Huntpad.scx#images\icon_luapower.png) } 
 li.nodejs { foreground-image: url(Huntpad.scx#images\icon_nodejs.png) }
 li.pascal { foreground-image: url(Huntpad.scx#images\icon_lang_pascal.png) }
 li.perl { foreground-image: url(Huntpad.scx#images\icon_lang_perl.png) } 
