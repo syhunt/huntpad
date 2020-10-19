@@ -1,0 +1,24 @@
+   <menu.popup id="usefulstrmenu">
+    <li style="foreground-image: url(Huntpad.scx#images\icon_dice.png);" onclick="reqbuilder.edit.insert(forge.randomstr(tonumber(app.showinputdialog('Length:','10')),'%u%l%d'))">Random String (Insecure)</li>
+    <li style="foreground-image: url(Huntpad.scx#images\icon_dice.png);" onclick="reqbuilder.edit.insert(math.random())">Random Number (Insecure)</li>
+    <hr/>
+    <li.num onclick="reqbuilder.edit.insert(os.time())">Current Time (UNIX)</li>
+    <li style="foreground-image: url(Huntpad.scx#images\icon_date.png);" onclick="reqbuilder.edit.insert(os.date('%x'))">Current Date</li>
+    <!--li.ip onclick="reqbuilder.edit.insert(quickinject.getmyip())">My IP Address</li-->
+    <hr/>
+    <li>Math
+     <menu>
+     <li style="foreground-image: url(Huntpad.scx#images\icon_pi.png);" onclick="reqbuilder.edit.insert(math.pi)">Pi</li>
+     <li onclick="reqbuilder.edit.insert(forge.getfibseq(21))">Fibonacci sequence</li>
+    </menu>
+    </li>
+    <li>Character Sets
+    <menu>
+     <li onclick="reqbuilder.edit.insert('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')">Alphabet</li>
+     <li onclick="reqbuilder.edit.insert('A0B1C2D3E4f0g1h2i3j456789')">Alphanumeric</li>
+     <li.num onclick="reqbuilder.edit.insert('0123456789')">Numbers</li>
+     <li onclick="reqbuilder.edit.insert([[~!@#$%^&*()_+='`;,.:<>]])">Special Characters</li>
+    </menu>
+    </li>
+    <li style="foreground-image: url(Huntpad.scx#images\icon_lipsum.png);" onclick="reqbuilder.edit.insert(quickinject.usefulstrings.lorem_ipsum)">Lorem ipsum</li>
+   </menu>

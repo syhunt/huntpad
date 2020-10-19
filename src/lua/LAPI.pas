@@ -34,7 +34,7 @@ end;
 
 function app_showabout(L: plua_State): Integer; cdecl;
 begin
-  ShowMessage(cAboutHuntPad);
+  Hntpad.ShowAbout;
   result := 1;
 end;
 

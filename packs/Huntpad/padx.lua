@@ -1,3 +1,4 @@
+-- Huntpad extension pack for the Sandcat Browser
 Huntpad = extensionpack:new()
 Huntpad.filename = 'Huntpad.scx'
 

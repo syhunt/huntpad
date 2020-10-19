@@ -48,6 +48,7 @@ type
     procedure LoadFromFile(fn: string);
     procedure SaveToFile(fn: string);
     procedure SaveAs(fn: string);
+    procedure ShowAbout;
   end;
 
 var
@@ -68,7 +69,7 @@ const
   cCaption = 'Huntpad';
   cUntitled = 'Untitled - '+cCaption;
   cAboutHuntPad = 'Syhunt Huntpad' +crlf+crlf+
-    'Version 1.0.3' +crlf+crlf+
+    'Version %ver%' +crlf+crlf+
     'Copyright (c) 2020 Syhunt Application Security Company';
   cHTML = 'HTML';
   cWinName = ' - Huntpad';
@@ -436,6 +437,14 @@ begin
      mrCancel: CanClose := false;
     end;
   end;
+end;
+
+procedure THntpad.ShowAbout;
+var
+  ver:string;
+begin
+  ver := GetFileVersion(Application.ExeName);
+  ShowMessage(replacestr(cAboutHuntPad,'%ver%',ver));
 end;
 
 procedure THntpad.FormCreate(Sender: TObject);

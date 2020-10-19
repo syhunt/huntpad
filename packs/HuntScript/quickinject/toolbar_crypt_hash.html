@@ -1,25 +1,8 @@
-<menu.popup id="cryptmenu">
- <li>MD5
-  <menu>
-  <li.do onclick="quickinject:runhash('md5')">MD5</li>
-  <hr #mdcrack />
-  <li.undo #mdoffline onclick="quickinject:crackhash('offline')">MD5 Offline Crack</li>
-  <li.undo #mdonline onclick="quickinject:crackhash('md5decryption.com')">MD5 Online Crack (md5decryption.com)</li>
-  </menu>
- </li>
- <li onclick="quickinject:runhash('sha1')">SHA-1</li>
- <li onclick="quickinject:runhash('sha256')">SHA-256</li>
  <hr/>
  <li>Checksums
   <menu>
    <li onclick="quickinject:runhash('adler32')">Adler-32</li>
    <li onclick="quickinject:run(forge.hash_fletcher)">Fletcher</li>
-  </menu>
- </li>
- <li>Classical Crypto
-  <menu>
-  <li onclick="quickinject:run(forge.rot13)">ROT13</li>
-  <li onclick="quickinject:run(quickinject.getcustomrot)">ROT[N]...</li>
   </menu>
  </li>
  <li>CRC
@@ -106,7 +89,4 @@
    <li .php onclick="quickinject:run(forge.crypt)">Crypt (PHP/MD5)</li>
   </menu>
  </li>
-</menu>
-</li>
-
-</menu>
+</li> 

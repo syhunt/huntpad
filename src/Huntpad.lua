@@ -6,6 +6,7 @@ require "Underscript"
 usrun = require "Underscript.Runner"
 usrun.options.redirectio = true
 require "Forge"
+require "luaonlua.preloaded"
 
 local reqbuildermenu = {}
 reqbuildermenu.msgnotext = 'No text selected.'

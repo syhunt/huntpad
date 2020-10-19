@@ -1,0 +1,45 @@
+<menu.popup id="cryptmenu">
+ <li .secrand onclick="reqbuilder.edit.insert(ctk.crypto.randompwd())">Random Password</li>
+ <li .secrand onclick="reqbuilder.edit.insert(ctk.crypto.randompwdadmin())">Random Password (Admin)</li> 
+ <li .secrand onclick="reqbuilder.edit.insert(ctk.crypto.randompwd(quickinject:getnumber(16)))">Random Password[N]...</li> 
+ <hr/>  
+ <li .secrand>Secure Random
+  <menu>
+ <include src="HuntScript.scx#quickinject\toolbar_crypt_secrand.html"/>
+  </menu>
+ </li> 
+ <li .secrand>Secure UUID
+  <menu>
+  <li .secrand onclick="quickinject:runluacode_delayed([[reqbuilder.edit.insert(require32('uuid').new())]])">Random UUID (Lua)</li>
+  <li .secrand onclick="reqbuilder.edit.insert(forge.securerandom_uuid_java())">Random UUID (Java)</li>
+ <include src="HuntScript.scx#quickinject\toolbar_crypt_secuuid.html"/>
+  </menu>
+ </li> 
+ <hr/> 
+ <li>MD5
+  <menu>
+  <li.do onclick="quickinject:run(ctk.crypto.md5)">MD5</li>
+  <hr #mdcrack />
+  <!--li.undo #mdoffline onclick="quickinject:crackhash('offline')">MD5 Offline Crack</li-->
+  <li.undo #mdonline onclick="quickinject:crackhash('md5decryption.com')">MD5 Online Crack (md5decryption.com)</li>
+  </menu>
+ </li>
+  <li>SHA-2
+  <menu>
+  <li.do onclick="quickinject:run(ctk.crypto.sha256)">SHA-256</li>
+  <li.do onclick="quickinject:run(ctk.crypto.sha384)">SHA-384</li>  
+  <li.do onclick="quickinject:run(ctk.crypto.sha512)">SHA-512</li>  
+  </menu>
+ </li>
+ <li onclick="quickinject:run(ctk.crypto.sha1)">SHA-1</li>
+ <include src="HuntScript.scx#quickinject\toolbar_crypt_hash.html"/>
+ <li>Classical Crypto
+  <menu>
+  <li onclick="quickinject:run(forge.rot13)">ROT13</li>
+  <li onclick="quickinject:run(quickinject.getcustomrot)">ROT[N]...</li>
+  </menu>
+ </li>
+</menu>
+</li>
+
+</menu>

@@ -34,6 +34,7 @@ begin
   ExecResource(L, 'IP'); // JS functions - IP related
   ExecResource(L, 'UTILS001'); // PHP functions
   ExecResource(L, 'UTILS002'); // Ruby functions
+  ExecResource(L, 'UTILS003'); // Java functions
   result := 0;
 end;
 

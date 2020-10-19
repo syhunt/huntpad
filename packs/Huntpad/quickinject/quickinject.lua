@@ -1,5 +1,6 @@
 require 'Underscript'
 require 'Forge'
+require 'luaonlua'
 
 quickinject = {}
 quickinject.opt_shellurl = 'quickinject.shell.php.url'
@@ -38,6 +39,14 @@ function quickinject:editprefs()
  quickinject.shell.php.out
  ]]
  Sandcat.Preferences:EditCustom(t)
+end
+
+function quickinject:getnumber(len,desc)
+  len = len or 10
+  desc = desc or 'Length'
+  desc = desc..':'
+  local ns = app.showinputdialog(desc, tostring(len))
+  return tonumber(ns)
 end
 
 function quickinject:getshellurl()
@@ -123,6 +132,10 @@ function quickinject:runlua()
   if code ~= '' then
     browser.dostring(code)
   end
+end
+
+function quickinject:runluacode_delayed(code)
+  ctk.utils.settimeout(10,code)
 end
 
 function quickinject:crackhash(mode)
