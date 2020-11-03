@@ -8,24 +8,23 @@
   <include src="HuntScript.scx#quickinject\toolbar_run_extrajs.html"/>
   </menu>
  </li> 
- <li .tiscript>JavaScript++
+ <li .tiscript>JavaScript Supersets
   <menu>
   <li .tiscript onclick="quickinject:runtis()">TIScript (This App)</li>
-  <hr/>   
-  <li .tiscript onclick="quickinject:runas(_script.jspp.tiscript)">TIScript</li>    
+  <include src="HuntScript.scx#quickinject\toolbar_run_extrajspp.html"/>
   </menu>
  </li>    
  <li .java onclick="quickinject:runas(_script.java)">Java</li>
  <li .lua>Lua
   <menu #runasmenulua>
-  <li onclick="quickinject:runlua()">Lua 5.1 x64 (This App)</li>
+  <li onclick="quickinject:runlua()">5.1 x64 (This App)</li>
   <hr/>  
-  <li onclick="quickinject:runas(_script.lua.v51)">Lua 5.1 x64</li>
+  <li onclick="quickinject:runas(_script.lua.v51)">5.1 x64</li>
   <include src="HuntScript.scx#quickinject\toolbar_run_extralua.html"/>
   </menu>
  </li>
  <hr/>
- <include src="HuntScript.scx#quickinject\toolbar_run_extra.html"/> 
+ <include src="HuntScript.scx#quickinject\toolbar_run_extra.html"/>  
  <li .pascal onclick="quickinject:runas(_script.pascal)">Pascal</li>
  <li .vbscript onclick="quickinject:runas(_script.vbscript)">VBScript</li>  
 </menu>

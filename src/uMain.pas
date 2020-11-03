@@ -75,7 +75,9 @@ const
   cWinName = ' - Huntpad';
   cFilter = 'Text files (*.txt)|*.txt|' +
     'HTML files (*.html, *.htm)|*.html;*.htm|' + 'CSS files (*.css)|*.css|' +
-    'JavaScript files (*.js, *.tis)|*.js;*.tis|' + 'JSON files (*.json)|*.json|' +
+    'JavaScript files (*.js)|*.js|' +
+    'JavaScript superset files (*.ts, *.tis, *.jspp)|*.ts;*.tis;*.jspp|' +
+    'JSON files (*.json)|*.json|' +
     'Java files (*.java)|*.java|' +
     'PHP files (*.php*)|*.php*|' + 'Ruby files (*.rb)|*.rb|' +
     'C files (*.c, *.h)|*.c;*.h|' +
@@ -83,7 +85,9 @@ const
     'C++ header files (*.hpp, *.hxx, *.hh)|*.hpp;*.hxx;*.hh|' +
     'C# files (*.cs)|*.cs|' +
     'Pascal files (*.pas, *.dpr)|*.pas;*.dpr|' + 'Perl files (*.pl)|*.pl|' +
-    'Python files (*.py)|*.py|' + 'SQL files (*.sql)|*.sql|' +
+    'Python files (*.py)|*.py|' +
+    'SQL files (*.sql)|*.sql|' +
+    'TypeScript files (*.ts)|*.ts|' +
     'VBScript files (*.vbs)|*.vbs|' + 'XML files (*.xml)|*.xml|' +
     'All files (*.*)|*.*';
 
