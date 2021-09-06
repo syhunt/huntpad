@@ -104,8 +104,7 @@ begin
   if UseLocalAppData = true then // this user
    result := GetSpecialFolderPath(CSIDL_LOCAL_APPDATA,true) else
    result := GetSpecialFolderPath(CSIDL_COMMON_APPDATA,true);  // all users
-  if endswith(result,'\') = false then
-    result := result+'\';
+    result := result+'\Syhunt\Sandcat\';
 end;
 
 function GetSandcatAppDataDir: string;
