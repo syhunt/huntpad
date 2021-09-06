@@ -64,6 +64,7 @@ var
   Fselpos: Integer;
   Prefs: TCatPreferences;
   vConfigFile: string = 'Sandcat.json';
+  UseLocalAppData: boolean = false;
 
 const
   cCaption = 'Huntpad';
@@ -98,13 +99,18 @@ uses CatRes, CatZIP, CatFiles, CatUI, CatJSON, LAPI, CatUtils, CatCLUtils;
 {$R *.dfm}
 {$R Pad.res}
 
-function GetAppDataDir: string;
+function GetAppDataDir:string;
 begin
-  // if IsSandcatPortable then
-  // result := extractfilepath(paramstr(0))
-  // else
-  result := GetSpecialFolderPath(CSIDL_LOCAL_APPDATA, true) +
-    '\Syhunt\Sandcat\';
+  if UseLocalAppData = true then // this user
+   result := GetSpecialFolderPath(CSIDL_LOCAL_APPDATA,true) else
+   result := GetSpecialFolderPath(CSIDL_COMMON_APPDATA,true);  // all users
+  if endswith(result,'\') = false then
+    result := result+'\';
+end;
+
+function GetSandcatAppDataDir: string;
+begin
+  result := GetAppDataDir + '\Syhunt\Sandcat\';
 end;
 
 const // Sandcat sub directories
@@ -457,6 +463,8 @@ var
 begin
   caption := cUntitled;
   progdir := extractfilepath(paramstr(0));
+  if fileexists(ProgDir+'\LocalAppData.json') then
+    UseLocalAppData:=true;
   pluginsdir := progdir + '\Packs\Extensions\';
   Prefs := TCatPreferences.Create;
   Prefs.FileName := (GetSandcatDir(SCDIR_CONFIG, true) + vConfigFile);
