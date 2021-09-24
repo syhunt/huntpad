@@ -190,6 +190,14 @@ function quickinject:runhash(algo)
  end
 end
 
+function quickinject.sha1_b64(s)
+  return '{SHA}'..ctk.base64.encode(ctk.convert.hextostr(ctk.crypto.sha1(s)))
+end
+
+function quickinject.crypt_b64salt(s)
+  return forge.crypt(sel,ctk.base64.encode(algo))
+end
+
 function quickinject:sendtojsconsole()
  local sel = reqbuilder.edit.getsel()
  if sel ~= '' then

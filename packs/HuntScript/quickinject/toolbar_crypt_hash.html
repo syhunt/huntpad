@@ -1,20 +1,5 @@
  <hr/>
- <li>Checksums
-  <menu>
-   <li onclick="quickinject:runhash('adler32')">Adler-32</li>
-   <li onclick="quickinject:run(forge.hash_fletcher)">Fletcher</li>
-  </menu>
- </li>
- <li>CRC
-  <menu>
-   <li onclick="quickinject:run(forge.crc16)">CRC16 (Modbus)</li>
-   <li onclick="quickinject:runhash('crc32')">CRC32 (Hex)</li>
-   <li onclick="quickinject:run(forge.crc32)">CRC32 (Decimal)</li>
-   <li onclick="quickinject:runhash('crc32b')">CRC32b</li>
-   <li onclick="quickinject:run(forge.crc32_mysql)">CRC32 - MySQL (&gt;=4.1)</li>
-  </menu>
- </li>
-<li>Crypto Hash
+<li>Various Hashes
 <menu>
  <li onclick="quickinject:runhash('gost')">GOST</li>
  <li>HAVAL
@@ -83,10 +68,29 @@
   </menu>
  </li>
  <li onclick="quickinject:runhash('whirlpool')">WHIRLPOOL</li>
- <hr/>
- <li>Other Hash
+</li> 
+<li>Crypt Hashes (htpasswd)
   <menu>
-   <li .php onclick="quickinject:run(forge.crypt)">Crypt (PHP/MD5)</li>
+   <li .php onclick="quickinject:run(forge.crypt)">Crypt (MD5, no salt)</li>
+   <li .php onclick="quickinject:run(quickinject.crypt_b64salt)">Crypt (Base64 Hash)</li>
+   <li .php onclick="quickinject:run(forge.crypt_apr1_md5)">Crypt (APR1-MD5; Apache 2.2.18+)</li>
+   <hr/>
+   <li onclick="quickinject:run(quickinject.sha1_b64)">SHA-1 (Base64-Encoded Digest)</li>
+   
+  </menu>
+</li>
+<li>Checksums
+  <menu>
+   <li onclick="quickinject:runhash('adler32')">Adler-32</li>
+   <li onclick="quickinject:run(forge.hash_fletcher)">Fletcher</li>
   </menu>
  </li>
-</li> 
+<li>CRC
+  <menu>
+   <li onclick="quickinject:run(forge.crc16)">CRC16 (Modbus)</li>
+   <li onclick="quickinject:runhash('crc32')">CRC32 (Hex)</li>
+   <li onclick="quickinject:run(forge.crc32)">CRC32 (Decimal)</li>
+   <li onclick="quickinject:runhash('crc32b')">CRC32b</li>
+   <li onclick="quickinject:run(forge.crc32_mysql)">CRC32 - MySQL (&gt;=4.1)</li>
+  </menu>
+</li>
